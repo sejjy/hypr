@@ -6,14 +6,14 @@ SCREENSHOT_DIR="$HOME/Pictures/Screenshots"
 # screenshot type
 case "$1" in
 "full")
-  # full-screen screenshot using grim
+  # full-screen screenshot
   FILENAME="Screenshot ($(($(find "$SCREENSHOT_DIR" -maxdepth 1 -name 'Screenshot*.png' 2>/dev/null | wc -l) + 1))).png"
-  grim - | wl-copy && wl-paste >"$SCREENSHOT_DIR/$FILENAME"
+  grimblast copysave screen "$SCREENSHOT_DIR/$FILENAME"
   ;;
 "partial")
-  # partial screenshot with region selection using slurp
+  # partial screenshot with region selection
   FILENAME="Screenshot ($(($(find "$SCREENSHOT_DIR" -maxdepth 1 -name 'Screenshot*.png' 2>/dev/null | wc -l) + 1))).png"
-  grim -g "$(slurp)" - | wl-copy && wl-paste >"$SCREENSHOT_DIR/$FILENAME"
+  grimblast copysave area "$SCREENSHOT_DIR/$FILENAME"
   ;;
 *)
   echo "Invalid argument"
