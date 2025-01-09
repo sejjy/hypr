@@ -22,8 +22,7 @@ case "$1" in
 "partial")
   # partial screenshot with region selection
   FILENAME=$(find_next)
-  grimblast copysave area "$SCREENSHOT_DIR/$FILENAME"
-  # --freeze does not work
+  grimblast --freeze copysave area "$SCREENSHOT_DIR/$FILENAME"
   ;;
 *)
   echo "Invalid argument"
