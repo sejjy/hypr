@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-player=$(playerctl metadata --format "{{ playerName }}")
+player=$(playerctl metadata --format "{{ playerName }}" 2>/dev/null)
 
 if [[ $player == "firefox" ]]; then
 	icon="<span color='#f38ba8'>󰗃 </span>"
@@ -10,14 +10,14 @@ else
 	icon="󰐊 "
 fi
 
-status=$(playerctl metadata --format "{{ status }}")
+status=$(playerctl metadata --format "{{ status }}" 2>/dev/null)
 
 if [[ $status != "Playing" ]]; then
 	icon="󰏤 "
 fi
 
-title=$(playerctl metadata --format "{{ title }}")
-artist=$(playerctl metadata --format "{{ artist }}")
+title=$(playerctl metadata --format "{{ title }}" 2>/dev/null)
+artist=$(playerctl metadata --format "{{ artist }}" 2>/dev/null)
 
 output="${title} — ${artist}"
 
@@ -28,6 +28,6 @@ if ((outlen > maxlen)); then
 	output="${output:0:$((maxlen - 3))}..."
 fi
 
-output=$(playerctl metadata --format "$icon  $output")
+output=$(playerctl metadata --format "$icon $output" 2>/dev/null)
 
 echo "$output"
